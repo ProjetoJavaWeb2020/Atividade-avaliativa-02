@@ -14,8 +14,8 @@ public class DbUtil {
 			String url = "jdbc:mysql://localhost:3306/";
 			                                   //corrige problema da timezone
 			String dbname = "rapaduralivre?useTimezone=true&serverTimezone=UTC";
-			String uname = "root";
-			String pwd = "reguladora123";
+			String uname = "";
+			String pwd = "";
 			
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
