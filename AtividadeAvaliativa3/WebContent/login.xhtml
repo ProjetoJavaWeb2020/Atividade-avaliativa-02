@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template = "WEB-INF/templates/template.xhtml">
+	<ui:define name = "conteudo">
+	
+		<div class = "conteudo">
+	
+			<div class = "loginbox">
+				<div class = "contact-title">
+					<h1>Logue-se aqui</h1>
+					<h3>Com doçura e com afeto fiz seu doce predileto</h3>
+				</div>
+				<h:form method = "post" action = "Controller">
+					    <h:outputText value="#{usuarioBean.mensagem}"></h:outputText>
+						<p>Usuário</p>
+						<h:inputText id = "usuario" name = "usuario" placeholder = "Seu usuario" value="#{usuarioBean.usuario.usuario}"></h:inputText>
+						<p>Senha</p>
+						<h:inputSecret id = "senha" name = "senha" placeholder = "Sua senha" value="#{usuarioBean.usuario.senha}"></h:inputSecret>
+						<h:commandButton value = "Logar" action = "#{usuarioBean.getLogin}"></h:commandButton>
+			
+				</h:form>
+				
+				<a href="registro.jsf">Não possui uma conta?</a>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

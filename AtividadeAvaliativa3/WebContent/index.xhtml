@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<h:outputStylesheet name="css/style.css" ></h:outputStylesheet>
+</h:head>
+<body>
+
+<c:set var="x" value="0"></c:set>
+	<c:forEach items="#{usuarioBean.carrinhoLista}" var="i">
+		<c:set var="x" value="#{x+1 }"></c:set>
+	</c:forEach>
+	
+	<header>
+		<h1 class = "title">
+			Rapadura Livre
+		</h1>
+		<nav>
+			<ul>
+				<li><a href = "index.jsf">Home</a></li>
+				<li><a href = "produto.jsf">Produtos</a></li>
+			<ui:fragment rendered="#{usuarioBean.sessao == null}">
+					<li><a href = "login.jsf">Login</a></li>
+					<li><a href = "registro.jsf">Inscreva-se</a></li>
+		    </ui:fragment>
+			<ui:fragment rendered="#{usuarioBean.sessao != null}">
+					<li><a href="#{usuarioBean.logout}.jsf">Sair</a></li>
+					<li><a href="#">Minha conta(<h:outputText  value="#{usuarioBean.usuario.usuario}"/>)</a></li>
+			</ui:fragment>
+			<li><a href="carrinho.jsf">Carrinho(<h:outputText  value="#{x}"/>)</a><h:graphicImage library = "img" name = "shopping-cart.png" width = "30px" height = "30px"/></li>
+			</ul>
+		
+		</nav>
+			
+		
+	</header>
+	
+		<div class = "conteudo">
+			<div class = "row">
+				<div class = "col-2">
+					<h1>Na dúvida,<br></br><h:outputText value="&#160;&#160;"/> seja doce !</h1>
+					<p>Comprar doces é como comprar<br></br> <h:outputText value="&#160;&#160;&#160;&#160;&#160;"/>pequenas doses de felicidade!</p>
+				</div>
+			
+				<div class = "col-2">
+					<h:graphicImage library = "img" name = "candy.png"></h:graphicImage>
+				</div>
+			</div>
+		</div>
+	<footer>&#169;  <script>document.write(new Date().getFullYear());</script>
+	      <a href="Controller?pagina=index"> RapaduraLivre.com</a>
+	</footer>
+</body>
+</html>

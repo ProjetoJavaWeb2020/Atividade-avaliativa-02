@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<h:outputStylesheet name="css/style.css" ></h:outputStylesheet>
+</h:head>
+<body>
+<c:set var="x" value="0"></c:set>
+	<c:forEach items="#{usuarioBean.carrinhoLista}" var="i">
+		<c:set var="x" value="#{x}"></c:set>
+	</c:forEach>
+	
+		<header>
+		<h1 class = "title">
+			Rapadura Livre
+		</h1>
+		<nav>
+			<ul>
+				<li><a href = "index.jsf">Home</a></li>
+				<li><a href = "produto.jsf">Produtos</a></li>
+			<ui:fragment rendered="#{usuarioBean.sessao == null}">
+					<li><a href = "login.jsf">Login</a></li>
+					<li><a href = "registro.jsf">Inscreva-se</a></li>
+		    </ui:fragment>
+			<ui:fragment rendered="#{usuarioBean.sessao != null}">
+					<li><a href="#{usuarioBean.logout}.jsf">Sair</a></li>
+					<li><a href="#">Minha conta(<h:outputText  value="#{usuarioBean.usuario.usuario}"/>)</a></li>
+			</ui:fragment>
+			<li><a href="carrinho.jsf">Carrinho(<h:outputText  value="#{x}"/>)</a><h:graphicImage library = "img" name = "shopping-cart.png" width = "30px" height = "30px"/></li>
+			</ul>
+		
+		</nav>
+			
+		
+	</header>
+	
+	<div class = "conteudo">
+	
+	<c:choose> 
+		<c:when test="${x == 1}">
+						<h4 style="margin-top: 40px;">Meu carrinho de compra (<h:outputText value="${x}"></h:outputText> item)</h4>
+		</c:when>
+		<c:when test="${x > 1}">
+						<h4 style="margin-top: 40px;">Meu carrinho de compras (<h:outputText value="${x}"></h:outputText> items)</h4>
+		</c:when>
+		<c:otherwise >
+				<h4 style="margin-top: 40px;">Seu carrinho está vazio</h4>
+		</c:otherwise>
+	
+	</c:choose>
+	<table>
+		<tr>
+			<th>Nome do produto</th>
+			<th>Preço</th>
+			<th>Categoria</th>
+			<th>Remover item</th>
+		</tr>
+	</table>
+	
+		<c:set var="total" value="0"></c:set>
+		<c:forEach items="#{usuarioBean.carrinhoLista}" var="i">
+			<c:forEach items="#{produtoBean.listaProduto}" var="produto">
+				<c:if test="#{i == produto.getId()}">
+				
+				<c:set var="total" value="#{total + produto.getPreco() }"></c:set>
+				
+			<table style="table-layout: fixed;width: 90%;">
+				<tr>
+					<td style="width: 100px;"><h:graphicImage name="#{produto.getImagem()}" height="100" width="150" ></h:graphicImage><h:outputText value="#{produto.getNome()}"/></td>
+					<td style="width: 50px;"><h:outputText value="#{produto.getPreco()}"></h:outputText></td>
+					<td style="width: 100px;"><h:outputText value="#{produto.getCategoria()}"></h:outputText></td>
+					<td style="width: 100px;"><h:form><h:commandLink action = "#{usuarioBean.getremoverItem(produto.id)}">X</h:commandLink></h:form></td>
+				</tr>
+			</table>
+				</c:if>
+			</c:forEach>
+		</c:forEach>
+	
+	<h4 style="margin-top: 40px;margin-bottom: 40px;">Total da compra: R$ (<h:outputText value="${ total}"></h:outputText>)</h4>
+	
+	<a href="Controller?pagina=sucesso"><input type="submit" value="Finalizar venda" style="width:90%;padding:8px;font-size:16px;"></input></a><br></br>
+	<a href="Controller?pagina=index"><input type="button" value="Continuar compra" style="width:90%;padding:8px;font-size:16px;margin-bottom: 40px;"></input></a>
+	
+	
+	</div>
+	<footer>&#169;  <script>document.write(new Date().getFullYear());</script>
+	      <a href="Controller?pagina=index"> RapaduraLivre.com</a>
+	</footer>
+</body>
+</html>

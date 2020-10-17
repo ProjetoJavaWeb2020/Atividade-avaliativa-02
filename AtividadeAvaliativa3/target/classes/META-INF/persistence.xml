@@ -1,0 +1,28 @@
+<persistence version = "2.1"
+	xmlns = "http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation = "http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd ">
+	
+<persistence-unit name = "sistemarapaduralivre">
+	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	<class>br.com.ecommerce.model.Produto</class>
+	<class>br.com.ecommerce.model.Usuario</class>
+	<properties>
+		<property name = "javax.persistence.schema-generation.database.action" value="update"/>
+		<property name = "javax.persistence.jdbc.url" value = "jdbc:mysql://localhost/sistemarapaduralivre?useTimezone=true&amp;serverTimezone=UTC"/><!-- problema de timzone -->
+		<property name = "javax.persistence.jdbc.user" value = ""/>
+		<property name = "javax.persistence.jdbc.password" value = ""/>
+		<property name = "javax.persistence.jdbc.driver" value = "com.mysql.jdbc.Driver"/>
+		<property name = "hibernate.dialect" value = "org.hibernate.dialect.MySQL5InnoDBDialect"/>
+		
+		<!-- habilita as saídas SQL aparecem no console -->
+		<property name = "hibernate.show_sql" value = "true"/>
+		
+		<!-- imprime SQL executado de forma legível on console e log -->
+		<property name = "hibernate.format_sql" value = "true"/>
+		<property name = "hibernate.use_sql_coments" value = "true"/>
+		
+	</properties>
+
+</persistence-unit>
+</persistence>

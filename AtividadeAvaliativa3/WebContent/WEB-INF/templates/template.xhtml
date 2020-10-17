@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<h:outputStylesheet name="css/style.css" ></h:outputStylesheet>
+	<style>
+	.bodyOutro{
+		margin : 0;
+		padding : 0;
+		background : linear-gradient(rgba(50, 0, 0, 0.2), rgba(50, 0, 0, 0.9)),url("resources/img/22470.jpg");
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size: cover;
+		font-family: sans-serif;
+	}
+	</style>
+</h:head>
+<h:body styleClass = "bodyOutro">
+<c:set var="x" value="0"></c:set>
+	<c:forEach items="#{usuarioBean.carrinhoLista}" var="i">
+		<c:set var="x" value="#{x}"></c:set>
+	</c:forEach>
+	
+	
+	<header>
+		<h1 class = "title">
+			Rapadura Livre
+		</h1>
+		<nav>
+			<ul>
+				<li><a href = "index.jsf">Home</a></li>
+				<li><a href = "produto.jsf">Produtos</a></li>
+			<ui:fragment rendered="#{usuarioBean.sessao == null}">
+					<li><a href = "login.jsf">Login</a></li>
+					<li><a href = "registro.jsf">Inscreva-se</a></li>
+		    </ui:fragment>
+			<ui:fragment rendered="#{usuarioBean.sessao != null}">
+					<li><a href="#{usuarioBean.logout}.jsf">Sair</a></li>
+					<li><a href="#">Minha conta(<h:outputText  value="#{usuarioBean.usuario.usuario}"/>)</a></li>
+			</ui:fragment>
+			<li><a href="carrinho.jsf">Carrinho(<h:outputText  value="#{x}"/>)</a><h:graphicImage library = "img" name = "shopping-cart.png" width = "30px" height = "30px"/></li>
+			</ul>
+		
+		</nav>
+			
+		
+	</header>
+	
+	
+	
+	<ui:insert name = "conteudo">
+					Conteúdo do Template que pode ser modificado
+					
+					
+	</ui:insert>
+	
+	
+	
+	<footer>&#169;  <script>document.write(new Date().getFullYear());</script>
+	      <a href="Controller?pagina=index"> RapaduraLivre.com</a>
+	</footer>
+</h:body>
+</html>

@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<ui:composition template = "WEB-INF/templates/template.xhtml">
+	<ui:define name = "conteudo">
+	
+	  <div class = "conteudo">
+		<div class="row1">
+
+			<div class="col-3">
+				<div class="categorias">
+					<a href="bombons.jsf" class="categoria-item">Bombons</a>
+					<a href="donuts.jsf" class="categoria-item">Donuts</a>
+					<a href="pirulitos.jsf" class="categoria-item">Pirulitos</a>
+					<a href="chocolates.jsf" class="categoria-item">Chocolates</a>
+					<a href="rapadura.jsf" class="categoria-item">Rapaduras</a>
+				</div>
+			</div>
+
+		</div>
+		<div class="row">
+			<ui:repeat var="produto" value="#{produtoBean.listaProduto}">
+				<ui:fragment  rendered="#{produto.categoria == 'bombons'}">
+					<div class="col-4">
+						    <h:graphicImage name = "#{produto.imagem}"></h:graphicImage>
+							<p><h:outputText value = "#{produto.nome}"></h:outputText> - R$<h:outputText value = "#{produto.preco}"></h:outputText></p>
+							<!-- <a href="Controller?pagina=adicionarCarrinho&acao=produtos&id=<c:out value="#{produto.getId()}"/>">Adicionar ao Carrinho</a> -->
+					</div>
+				</ui:fragment>
+			</ui:repeat>
+		</div>
+	</div>
+	
+	</ui:define>
+</ui:composition>
+</html>
